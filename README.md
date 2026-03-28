@@ -35,28 +35,22 @@ Create .github/workflows/pr-checks.yml — a real-world PR gate:
   
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/2ced9d10-6cfb-41e2-85f1-c55145afccf6" />
 
-## Task 3: Path & Branch Filters
+## Task 3: workflow_run — Chain Workflows Together
 
-Create .github/workflows/smart-triggers.yml:
+Create two workflows:
 
-  1. Trigger on push but only when files in src/ or app/ change:
-
+ 1 .github/workflows/tests.yml — runs tests on every push
+ 2. .github/workflows/deploy-after-tests.yml — triggers only after tests.yml completes successfully:
+ 
 on:
 
-  push:
+  workflow_run:
   
-    paths:
-
+    workflows: ["Run Tests"]
+    
+    types: [completed]
+    
+3. In the deploy workflow, add a conditional:
    
-      - 'src/**'
-      - 'app/**'
-      
-2. Add paths-ignore in a second workflow that skips runs when only docs change:
-
-paths-ignore:
-
-  - '*.md'
-  - 'docs/**'
-
-3. Add branch filters to only trigger on main and release/* branches
-4. Test it: push a change to a .md file — does the workflow skip?
+ - Only proceed if the triggering workflow succeeded (${{ github.event.workflow_run.conclusion == 'success' }})
+- Print a warning and exit if it failed
