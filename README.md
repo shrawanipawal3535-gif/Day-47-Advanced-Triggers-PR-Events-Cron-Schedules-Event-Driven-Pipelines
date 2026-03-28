@@ -12,3 +12,23 @@ Create .github/workflows/pr-lifecycle.yml that triggers on pull_request with spe
     - Print the source branch and target branch
       
 3. Add a conditional step that only runs when the PR is merged (closed + merged = true)
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/970f9c57-00c2-42f5-8bf8-f6e0ffead028" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/9345f1d4-4d60-4ae8-966f-648ab4f753e8" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/68a17745-0f20-4e88-987d-255fa9876b97" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/503f8db6-f015-4f55-ba7e-eccd9ed1af6d" />
+
+ ## Task 2: PR Validation Workflow
+ 
+Create .github/workflows/pr-checks.yml — a real-world PR gate:
+
+1. Trigger on pull_request to main
+2. Add a job file-size-check that:
+   - Checks out the code
+   - Fails if any file in the PR is larger than 1 MB
+3. Add a job branch-name-check that:
+   - Reads the branch name from ${{ github.head_ref }}
+    - Fails if it doesn't follow the pattern feature/*, fix/*, or docs/*
+4. Add a job pr-body-check that:
+   - Reads the PR body: ${{ github.event.pull_request.body }}
+   - Warns (but doesn't fail) if the PR description is empty
