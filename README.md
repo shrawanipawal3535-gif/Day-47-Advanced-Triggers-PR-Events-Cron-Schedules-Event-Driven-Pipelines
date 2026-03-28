@@ -32,3 +32,31 @@ Create .github/workflows/pr-checks.yml — a real-world PR gate:
 4. Add a job pr-body-check that:
    - Reads the PR body: ${{ github.event.pull_request.body }}
    - Warns (but doesn't fail) if the PR description is empty
+  
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/2ced9d10-6cfb-41e2-85f1-c55145afccf6" />
+
+## Task 3: Path & Branch Filters
+
+Create .github/workflows/smart-triggers.yml:
+
+  1. Trigger on push but only when files in src/ or app/ change:
+
+on:
+
+  push:
+  
+    paths:
+
+   
+      - 'src/**'
+      - 'app/**'
+      
+2. Add paths-ignore in a second workflow that skips runs when only docs change:
+
+paths-ignore:
+
+  - '*.md'
+  - 'docs/**'
+
+3. Add branch filters to only trigger on main and release/* branches
+4. Test it: push a change to a .md file — does the workflow skip?
