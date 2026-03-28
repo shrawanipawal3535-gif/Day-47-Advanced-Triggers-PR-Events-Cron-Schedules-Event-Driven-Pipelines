@@ -54,3 +54,6 @@ on:
    
  - Only proceed if the triggering workflow succeeded (${{ github.event.workflow_run.conclusion == 'success' }})
 - Print a warning and exit if it failed
+
+  <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/723eb11d-f967-4079-b0ac-af1f412dad08" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/c6b5777c-ba18-45ef-a8cb-66975f49c109" />
